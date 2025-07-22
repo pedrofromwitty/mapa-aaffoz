@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mapa Interativo – Intervenção Costeira</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 600px;
+      width: 100%;
+    }
+    .legend {
+      background: white;
+      padding: 8px;
+      font-size: 14px;
+      line-height: 1.5em;
+    }
+    .legend span {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin-right: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Mapa Interativo – Estado das Praias</h2>
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const map = L.map('map').setView([40.125, -8.85], 12);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  const statusColors = {
+    "Aberta": "green",
+    "Interdita": "red",
+    "Em obras": "orange"
+  };
+
+  const praias = [
+    { nome: "Praia da Costa de Lavos", coords: [40.044, -8.898], estado: "Aberta" },
+    { nome: "Praia da Cova Gala", coords: [40.112, -8.864], estado: "Em obras" },
+    { nome: "Praia do Cabedelo", coords: [40.135, -8.872], estado: "Interdita" },
+    { nome: "Praia do Molhe Norte", coords: [40.141, -8.878], estado: "Aberta" },
+    { nome: "Praia de Quiaios", coords: [40.217, -8.882], estado: "Em obras" }
+  ];
+
+  praias.forEach(praia => {
+    const marker = L.circleMarker(praia.coords, {
+      radius: 8,
+      fillColor: statusColors[praia.estado],
+      color: "#333",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 0.8
+    }).addTo(map);
+
+    marker.bindPopup(`<strong>${praia.nome}</strong><br>Estado: <em>${praia.estado}</em>`);
+  });
+
+  const legend = L.control({ position: "bottomright" });
+  legend.onAdd = function (map) {
+    const div = L.DomUtil.create("div", "legend");
+    div.innerHTML =
+      '<strong>Legenda</strong><br>' +
+      '<span style="background: green"></span> Aberta<br>' +
+      '<span style="background: red"></span> Interdita<br>' +
+      '<span style="background: orange"></span> Em obras';
+    return div;
+  };
+  legend.addTo(map);
+</script>
+
+</body>
+</html>
