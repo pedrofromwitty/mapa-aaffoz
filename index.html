@@ -8,22 +8,20 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
     #map { height: 100vh; }
-
     .info.legend {
-  background: white;
-  padding: 6px 8px;
-  font: 14px/16px Arial, sans-serif;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  border-radius: 5px;
-}
+      background: white;
+      padding: 6px 8px;
+      font: 14px/16px Arial, sans-serif;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      border-radius: 5px;
+    }
     .info.legend i {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  margin-right: 8px;
-  opacity: 0.8;
-}
-
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin-right: 8px;
+      opacity: 0.8;
+    }
     </style>
 </head>
 <body>
@@ -36,57 +34,58 @@
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
+    // Fase 1 - Intervenção Concluída
     L.polygon([[40.127892419955536, -8.864797353744509], [40.127662725736414, -8.863445520401003], [40.126079455183955, -8.86402487754822], [40.126276340576446, -8.865290880203249]], {
-        color: "red",
-        fillColor: "red",
+        color: "green",
+        fillColor: "green",
         fillOpacity: 0.5
-    }).addTo(map).bindPopup("<h3>Fase 1</h3><strong>Estado Atual:</strong> Em Intervenção (Interdita)<br><strong>Fim Intervenção:</strong> julho 2025");
-    
+    }).addTo(map).bindPopup("<h3>Fase 1</h3><strong>Estado Atual:</strong> Intervenção Concluída (Permitida)<br><strong>Fim Intervenção:</strong> julho 2025");
+
+    // Fase 2 - Intervenção Concluída
     L.polygon([[40.12603843732205, -8.865355253219606], [40.12579232963106, -8.864078521728517], [40.12426644205959, -8.864400386810305], [40.12443051763541, -8.86603116989136]], {
-        color: "red",
-        fillColor: "red",
+        color: "green",
+        fillColor: "green",
         fillOpacity: 0.5
-    }).addTo(map).bindPopup("<h3>Fase 2</h3><strong>Estado Atual:</strong> Em Intervenção (Interdita)<br><strong>Fim Intervenção:</strong> julho 2025");
-    
+    }).addTo(map).bindPopup("<h3>Fase 2</h3><strong>Estado Atual:</strong> Intervenção Concluída (Permitida)<br><strong>Fim Intervenção:</strong> julho 2025");
+
+    // Fase 3
     L.polygon([[40.12419281302874, -8.866052627563478], [40.12397951395719, -8.864185810089113], [40.12368417567632, -8.863584995269777], [40.12315912667569, -8.863306045532228], [40.12276533726415, -8.863348960876467], [40.12105868500665, -8.863896131515505], [40.121739628185885, -8.867222070693972]], {
         color: "red",
         fillColor: "red",
         fillOpacity: 0.5
     }).addTo(map).bindPopup("<h3>Fase 3</h3><strong>Estado Atual:</strong> Em Intervenção (Interdita)<br><strong>Fim Intervenção:</strong> julho/agosto 2025");
-    
+
+    // Fase 4
     L.polygon([[40.12161677178567, -8.867297172546388], [40.120894806410575, -8.863971233367922], [40.11731768305722, -8.865344524383547], [40.11831864020496, -8.869550228118898]], {
         color: "orange",
         fillColor: "orange",
         fillOpacity: 0.5
     }).addTo(map).bindPopup("<h3>Fase 4</h3><strong>Estado Atual:</strong> Intervenção Planeada (Permitida)<br><strong>Fim Intervenção:</strong> agosto/setembro 2025");
-    
+
+    // Fase 5
     L.polygon([[40.11808932388949, -8.869786262512209], [40.117203228436885, -8.865923881530763], [40.116612491720254, -8.865537643432619], [40.115102807906986, -8.865923881530763], [40.112280265658484, -8.867039680480959], [40.11356027026425, -8.872060775756838]], {
         color: "orange",
         fillColor: "orange",
         fillOpacity: 0.5
     }).addTo(map).bindPopup("<h3>Fase 5</h3><strong>Estado Atual:</strong> Intervenção Planeada (Permitida)<br><strong>Fim Intervenção:</strong> setembro 2025");
-    
+
+    // Fase 6
     L.polygon([[40.11329770718092, -8.87227535247803], [40.111952055468805, -8.867082595825197], [40.1040088859321, -8.870429992675783], [40.106076825156904, -8.877811431884767]], {
         color: "orange",
         fillColor: "orange",
         fillOpacity: 0.5
     }).addTo(map).bindPopup("<h3>Fase 6</h3><strong>Estado Atual:</strong> Intervenção Planeada (Permitida)<br><strong>Fim Intervenção:</strong> outubro 2025");
- 
 
-
-      var legend = L.control({position: 'bottomright'});
-
-  legend.onAdd = function (map) {
-    var div = L.DomUtil.create('div', 'info legend');
-    div.innerHTML += '<i style="background: green"></i> Intervenção Concluída (Permitida)<br>';
-    div.innerHTML += '<i style="background: red"></i> Em Intervenção (Interdita)<br>';
-    div.innerHTML += '<i style="background: orange"></i> Intervenção Planeada (Permitida)<br>';
-    return div;
-  };
-
-  legend.addTo(map);
-
+    // Legenda
+    var legend = L.control({position: 'bottomright'});
+    legend.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'info legend');
+        div.innerHTML += '<i style="background: green"></i> Intervenção Concluída (Permitida)<br>';
+        div.innerHTML += '<i style="background: red"></i> Em Intervenção (Interdita)<br>';
+        div.innerHTML += '<i style="background: orange"></i> Intervenção Planeada (Permitida)<br>';
+        return div;
+    };
+    legend.addTo(map);
 </script>
-
 </body>
 </html>
